@@ -170,9 +170,20 @@ function objOfMatches(array1, array2, callback) {
 
 //Extension 6
 function multiMap(arrVals, arrCallbacks) {
+    var elements = [];
+    arrVals.forEach(element => {
+        var elem = new Object();
+        var value = '';
+        for(var i = 0; i < arrCallbacks.length; i++){
+            var a = arrCallbacks[i];
+            value += a(element) + ', ';
+        }
+        elem[element] = value;
+        elements.push(elem);
+    });
 
+    console.log(elements);
 }
-
 // console.log(multiMap(['catfood', 'glue', 'beer'], [function(str) { return str.toUpperCase(); }, function(str) { return str[0].toUpperCase() + str.slice(1).toLowerCase(); }, function(str) { return str + str; }]));
 // should log: { catfood: ['CATFOOD', 'Catfood', 'catfoodcatfood'], glue: ['GLUE', 'Glue', 'glueglue'], beer: ['BEER', 'Beer', 'beerbeer'] }
 
