@@ -74,24 +74,24 @@ function reduce(array, callback, initialValue) {
 
 // console.log(reduce([4,1,3], add, 0));
 
-function reduce(array1, array2) {
-    var common = [];
+// function reduce(array1, array2) {
+//     var common = [];
 
-    if(array1 != null){
-        for(var  i = 0; i < array1.length; i++){
-            if(array2 != null){
-                for(var j = 0; j < array2.length; j++){
-                    if(array1[i] == array2[j]){
-                        common.push(array1[i]);
-                    }
-                }
-            }
-        }
-    }
+//     if(array1 != null){
+//         for(var  i = 0; i < array1.length; i++){
+//             if(array2 != null){
+//                 for(var j = 0; j < array2.length; j++){
+//                     if(array1[i] == array2[j]){
+//                         common.push(array1[i]);
+//                     }
+//                 }
+//             }
+//         }
+//     }
 
-    // console.log(common);
-    return common;
-}
+//     // console.log(common);
+//     return common;
+// }
 
 //Extension 3
 function intersection(arrays) {
@@ -115,12 +115,37 @@ function intersection(arrays) {
     return commonArray[0];
 }
 
-console.log(intersection([[5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20]]));
+// console.log(intersection([[5, 10, 15, 20], [15, 88, 1, 5, 7], [1, 10, 15, 5, 20]]));
 // should log: [5, 15]
+
+function reduce(allElements){
+    var sameElements = [];
+    for(var i = 0; i < allElements.length; i++){
+        var isInArray = false;
+        for(var j = 0; j < sameElements.length; j++){
+            if(allElements[i] == sameElements[j]){
+                isInArray = true;
+            }
+        }
+        if(!isInArray){
+            sameElements.push(allElements[i]);
+        }
+    }
+    return sameElements;
+}
 
 //Extension 4
 function union(arrays) {
+    var allElements = [];
+    for(var i = 0; i < arrays.length; i++){
+        var array = arrays[i];
+        for(var j = 0; j < array.length; j++){
+            allElements.push(array[j]);
+        }
+    }
 
+    var union = reduce(allElements);
+    console.log(union);
 }
 
 // console.log(union([5, 10, 15], [15, 88, 1, 5, 7], [100, 15, 10, 1, 5]));
@@ -128,9 +153,18 @@ function union(arrays) {
 
 //Extension 5
 function objOfMatches(array1, array2, callback) {
-
+    var elements = [];
+    for(var i = 0; i < array1.length; i++){
+        var elem = new Object();
+        for(var j = 0; j < array2.length; j++){
+            if(callback(array1[i]) == array2[j]){
+                elem[array1[i]] = array2[j];
+                elements.push(elem);
+            }
+        }
+    }
+    console.log(elements);
 }
-
 // console.log(objOfMatches(['hi', 'howdy', 'bye', 'later', 'hello'], ['HI', 'Howdy', 'BYE', 'LATER', 'hello'], function(str) { return str.toUpperCase(); }));
 // should log: { hi: 'HI', bye: 'BYE', later: 'LATER' }
 
